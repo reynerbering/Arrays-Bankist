@@ -177,14 +177,12 @@ btnLoan.addEventListener('click', function (e) {
 
   const amount = Number(inputLoanAmount.value);
 
-  if(amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     currentAccount.movements.push(amount);
     updateUI(currentAccount);
     inputLoanAmount.textContent = '';
   }
-
 });
-
 
 btnClose.addEventListener('click', function (e) {
   e.preventDefault();
@@ -268,16 +266,72 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // console.log (`Your latest large movement was ${movements.length - lastLargeMovement } movements ago`);
 
-console.log(movements);
-console.log(movements.includes(-130));
+// console.log(movements);
+// console.log(movements.includes(-130));
 
-const anyDeposits = movements.some(mov => mov > 0);
-console.log(anyDeposits);
+// const anyDeposits = movements.some(mov => mov > 0);
+// console.log(anyDeposits);
 
-console.log(movements.every(mov => mov > 0));
-console.log(account4.movements.every(mov => mov > 0));
+// console.log(movements.every(mov => mov > 0));
+// console.log(account4.movements.every(mov => mov > 0));
 
-const deposit = mov => mov > 0;
-console.log(movements.some(deposit));
-console.log(movements.every(deposit));
-console.log(movements.filter(deposit));
+// const deposit = mov => mov > 0;
+// console.log(movements.some(deposit));
+// console.log(movements.every(deposit));
+// console.log(movements.filter(deposit));
+
+// const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+// console.log(arr.flat());
+// const arrDeep = [[1, [2, 3]], [4, [5, 6]], 7, 8];
+// console.log(arrDeep.flat(2));
+
+// const overallBalance = accounts
+//   .map(acc => acc.movements)
+//   .flat()
+//   .reduce((acc, mov) => acc + mov, 0);
+// const overallBalance2 = accounts
+//   .flatMap(acc => acc.movements)
+//   .reduce((acc, mov) => acc + mov, 0);
+
+const breeds = [
+  {
+    breed: 'German Shepherd',
+    averageWeight: 32,
+    activities: ['fetch', 'swimming'],
+  },
+  {
+    breed: 'Dalmatian',
+    averageWeight: 24,
+    activities: ['running', 'fetch', 'agility'],
+  },
+  {
+    breed: 'Labrador',
+    averageWeight: 28,
+    activities: ['swimming', 'fetch'],
+  },
+  {
+    breed: 'Beagle',
+    averageWeight: 12,
+    activities: ['digging', 'fetch'],
+  },
+  {
+    breed: 'Husky',
+    averageWeight: 26,
+    activities: ['running', 'agility', 'swimming'],
+  },
+  {
+    breed: 'Bulldog',
+    averageWeight: 36,
+    activities: ['sleeping'],
+  },
+  {
+    breed: 'Poodle',
+    averageWeight: 18,
+    activities: ['agility', 'fetch'],
+  },
+];
+
+
+//8
+const activeBreed = breeds.map(breed => breed.activities.length).some(count => count >= 3);
+console.log(activeBreed);
