@@ -61,9 +61,12 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const html = `
@@ -203,6 +206,14 @@ btnClose.addEventListener('click', function (e) {
   inputCloseUsername.value = inputClosePin.value = '';
 });
 
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
+
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 // const eurToUsd = 1.1;
@@ -293,7 +304,7 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 //   .flatMap(acc => acc.movements)
 //   .reduce((acc, mov) => acc + mov, 0);
 
-const breeds = [
+/*const breeds = [
   {
     breed: 'German Shepherd',
     averageWeight: 32,
@@ -330,8 +341,60 @@ const breeds = [
     activities: ['agility', 'fetch'],
   },
 ];
+//1
+const huskyWeight = breeds.find(dog => dog.breed === 'Husky').averageWeight;
+console.log(huskyWeight);
 
+//2
+const dogBothActivities = breeds.find(
+  dog => dog.activities.includes('running') && dog.activities.includes('fetch'),
+).breed;
+console.log(dogBothActivities);
 
-//8
-const activeBreed = breeds.map(breed => breed.activities.length).some(count => count >= 3);
-console.log(activeBreed);
+//3
+const allActivities = breeds.flatMap(dog => dog.activities);
+console.log(allActivities);
+
+//4
+const uniqueActivities = [...new Set(allActivities)];
+console.log(uniqueActivities);
+
+//5
+const swimmingAdjacent = [
+  ...new Set(
+    breeds
+      .filter(dog => dog.activities.includes('swimming'))
+      .flatMap(dog => dog.activities)
+      .filter(activity => activity != 'swimming'),
+  ),
+];
+console.log(swimmingAdjacent);
+
+//6
+const dogsAverageWeight = breeds.every(dog => dog.averageWeight >= 10);
+console.log(dogsAverageWeight);
+
+//7
+const anyDogsActive = breeds.some(dogs => dogs.activities.length >= 3);
+console.log(anyDogsActive);
+
+const averageWeightOfHeaviestBreedThatLikesToFetch = breeds.filter(
+  dogs => dogs.activities.includes('fetch'))
+  .map(breed => breed.averageWeight);
+const heaviestFetchBreed = Math.max(...averageWeightOfHeaviestBreedThatLikesToFetch);
+
+  console.log(averageWeightOfHeaviestBreedThatLikesToFetch);
+  console.log(heaviestFetchBreed);*/
+
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+console.log(movements);
+movements.sort((a, b) => a - b);
+console.log(movements);
+movements.sort((a, b) => {
+  if (a > b) return -1;
+  if (b > a) return 1;
+});
+console.log(movements);
